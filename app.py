@@ -7,8 +7,8 @@ from phi.model.google import Gemini
 from phi.tools.tavily import TavilyTools
 from constants import SYSTEM_PROMPT, INSTRUCTIONS
 
-os.environ['TAVILY_API_KEY'] = st.secret['TAVILY_KEY']
-os.environ['GOOGLE_API_KEY'] = st.secret['GEMINI_KEY']
+os.environ['TAVILY_API_KEY'] = st.secrets['TAVILY_KEY']
+os.environ['GOOGLE_API_KEY'] = st.secrets['GEMINI_KEY']
 
 MAX_IMAGE_WIDTH = 300
 
