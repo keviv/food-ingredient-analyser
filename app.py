@@ -8,11 +8,14 @@ from phi.model.google import Gemini
 from phi.tools.tavily import TavilyTools
 from constants import SYSTEM_PROMPT, INSTRUCTIONS
 
-# os.environ['TAVILY_API_KEY'] = TAVILY_KEY
-# os.environ['GOOGLE_API_KEY'] = GEMINI_KEY
+TAVILY_KEY = "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"
+GEMINI_KEY = "AIzaSyDgpr4tcxnqbSspkK6byL2Rwis4Wal2K_4"
 
-os.environ['TAVILY_API_KEY'] = st.secrets['TAVILY_KEY']
-os.environ['GOOGLE_API_KEY'] = st.secrets['GEMINI_KEY']
+os.environ['TAVILY_API_KEY'] = TAVILY_KEY
+os.environ['GOOGLE_API_KEY'] = GEMINI_KEY
+
+# os.environ['TAVILY_API_KEY'] = st.secrets['TAVILY_KEY']
+# os.environ['GOOGLE_API_KEY'] = st.secrets['GEMINI_KEY']
 
 MAX_IMAGE_WIDTH = 300
 
@@ -88,8 +91,7 @@ def main():
         if uploaded_file:
             resized_image = resize_image_for_display(uploaded_file)
             st.image(resized_image, caption="Uploaded Image", use_container_width=False, width=MAX_IMAGE_WIDTH)
-            if st.button("🔍 Analyze Uploaded Image", key="analyze_upload") and not st.session_state.analyze_clicked:
-                st.session_state.analyze_clicked = True
+            if st.button("🔍 Analyze Uploaded Image", key="analyze_upload"):
                 with NamedTemporaryFile(dir='.', suffix='.jpg') as f:
                     f.write(uploaded_file.getbuffer())
                     analyze_image(f.name)
@@ -100,8 +102,7 @@ def main():
         if camera_photo:
             resized_image = resize_image_for_display(camera_photo)
             st.image(resized_image, caption="Captured Photo", use_container_width=False, width=MAX_IMAGE_WIDTH)
-            if st.button("🔍 Analyze Captured Photo", key="analyze_camera") and not st.session_state.analyze_clicked:
-                st.session_state.analyze_clicked = True
+            if st.button("🔍 Analyze Captured Photo", key="analyze_camera"):
                 with NamedTemporaryFile(dir='.', suffix='.jpg') as f:
                     f.write(camera_photo.getbuffer())
                     analyze_image(f.name)
