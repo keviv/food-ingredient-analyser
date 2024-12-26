@@ -10,7 +10,7 @@ from constants import SYSTEM_PROMPT, INSTRUCTIONS
 os.environ['TAVILY_API_KEY'] = st.secrets['TAVILY_KEY']
 os.environ['GOOGLE_API_KEY'] = st.secrets['GEMINI_KEY']
 
-MAX_IMAGE_WIDTH = 300
+MAX_IMAGE_WIDTH = 600
 
 def resize_image_for_display(image_file):
     """Resize image for display only, returns bytes"""
