@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import numpy as np
 from PIL import Image
 from io import BytesIO
 from phi.agent import Agent
@@ -85,6 +86,7 @@ def main():
         if uploaded_file:
             resized_image = resize_image_for_display(uploaded_file)
             st.image(resized_image, caption="Uploaded Image", use_container_width=False, width=MAX_IMAGE_WIDTH)
+            img_array = np.array(uploaded_file)
             if st.button("🔍 Analyze Uploaded Image", key="analyze_upload") and not st.session_state.analyze_clicked:
                 st.session_state.analyze_clicked = True
                 analyze_image(uploaded_file)
