@@ -10,7 +10,7 @@ from constants import SYSTEM_PROMPT, INSTRUCTIONS
 os.environ['TAVILY_API_KEY'] = st.secrets['TAVILY_KEY']
 os.environ['GOOGLE_API_KEY'] = st.secrets['GEMINI_KEY']
 
-MAX_IMAGE_WIDTH = 600
+MAX_IMAGE_WIDTH = 300
 
 def resize_image_for_display(image_file):
     """Resize image for display only, returns bytes"""
@@ -85,7 +85,8 @@ def main():
         if uploaded_file:
             resized_image = resize_image_for_display(uploaded_file)
             st.image(resized_image, caption="Uploaded Image", use_container_width=False, width=MAX_IMAGE_WIDTH)
-            if st.button("🔍 Analyze Uploaded Image", key="analyze_upload"):
+            if st.button("🔍 Analyze Uploaded Image", key="analyze_upload") and not st.session_state.analyze_clicked:
+                st.session_state.analyze_clicked = True
                 analyze_image(uploaded_file)
     
 
