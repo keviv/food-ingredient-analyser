@@ -1,6 +1,5 @@
 import streamlit as st
 import os
-import numpy as np
 from PIL import Image
 from io import BytesIO
 from phi.agent import Agent
@@ -79,14 +78,12 @@ def main():
     
     with tab_upload:
         uploaded_file = st.file_uploader(
-            "Upload product image", 
-            type=["jpg", "jpeg", "png"],
+            "Upload product image",
             help="Upload a clear image of the product's ingredient list"
         )
         if uploaded_file:
             resized_image = resize_image_for_display(uploaded_file)
             st.image(resized_image, caption="Uploaded Image", use_container_width=False, width=MAX_IMAGE_WIDTH)
-            img_array = np.array(uploaded_file)
             if st.button("🔍 Analyze Uploaded Image", key="analyze_upload") and not st.session_state.analyze_clicked:
                 st.session_state.analyze_clicked = True
                 analyze_image(uploaded_file)
