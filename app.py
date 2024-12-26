@@ -87,7 +87,7 @@ def main():
             st.image(resized_image, caption="Uploaded Image", use_container_width=False, width=MAX_IMAGE_WIDTH)
             if st.button("🔍 Analyze Uploaded Image", key="analyze_upload") and not st.session_state.analyze_clicked:
                 st.session_state.analyze_clicked = True
-                analyze_image(uploaded_file)
+                analyze_image(resized_image)
     
 
     with tab_camera:
